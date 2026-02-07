@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Swara 🥀</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@200;400;600&family=Playfair+Display:italic,wght@700&display=swap');
+
+        :root {
+            --rose: #ff4d6d;
+            --gold: #ffb703;
+            --glow: rgba(255, 77, 109, 0.8);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #050505;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bg-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #2b0b11 0%, #050505 100%);
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.5;
+            animation: floatUp linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        /* Intro Screen */
+        #intro-page {
+            text-align: center;
+            animation: fadeIn 2s ease;
+            z-index: 10;
+        }
+
+        .valentine-header {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.8rem, 7vw, 3rem);
+            background: linear-gradient(45deg, #fff, var(--rose), #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px var(--glow));
+        }
+
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* Bouquet Hint Text */
+        #bouquet-hint {
+            font-size: 0.8rem;
+            color: #fff;
+            opacity: 0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            animation: fadeIn 1.5s ease forwards 1s, pulseSoft 2s infinite 2.5s;
+        }
+
+        .bouquet {
+            font-size: clamp(90px, 20vw, 130px);
+            cursor: pointer;
+            filter: drop-shadow(0 0 35px var(--rose));
+            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: quickShimmer 0.1s ease-out 1.5s; 
+        }
+
+        @keyframes quickShimmer {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 50px #fff); }
+            100% { transform: scale(1); }
+        }
+
+        .waiting-msg {
+            margin-top: 25px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #d1d1d1;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Message Card */
+        #message-page {
+            display: none;
+            width: 90%;
+            max-width: 420px;
+            max-height: 85vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            z-index: 10;
+            padding-bottom: 50px;
+        }
+
+        #message-page::-webkit-scrollbar { display: none; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 40px 25px;
+            border-radius: 40px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        .swara-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--rose);
+            margin-bottom: 15px;
+        }
+
+        .emotional-para {
+            font-size: 0.95rem;
+            font-weight: 200;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+
+        .heart-system {
+            position: relative;
+            margin: 15px 0;
+            height: 110px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #the-heart {
+            font-size: 85px;
+            cursor: pointer;
+            filter: drop-shadow(0 0 20px var(--rose));
+        }
+
+        #crack-overlay {
+            position: absolute;
+            font-size: 100px;
+            color: #000;
+            font-weight: 900;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* I Love You Hint */
+        #btn-hint {
+            display: none;
+            font-size: 0.75rem;
+            color: #fff;
+            opacity: 0.7;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounceIn 0.5s ease-out, pulseSoft 1.5s infinite;
+        }
+
+        .btn-luxe {
+            background: var(--rose);
+            color: white;
+            border: none;
+            padding: 14px 45px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+            position: relative;
+        }
+
+        .flash-trigger {
+            animation: quickFlash 0.1s ease-out forwards;
+        }
+
+        #heart-tap-hint {
+            display: none;
+            margin-top: 15px;
+            font-size: 0.7rem;
+            color: var(--rose);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: pulseHint 1.5s infinite;
+        }
+
+        #shayari-reveal {
+            display: none;
+            margin-top: 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #fff;
+            padding-bottom: 20px;
+        }
+
+        #final-vow-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.96);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .vow-content {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--gold);
+            padding: 20px;
+            text-shadow: 0 0 30px var(--gold);
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: translateY(10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 0.7; }
+        }
+        @keyframes quickFlash {
+            0% { background: var(--rose); transform: scale(1); }
+            50% { background: #fff; transform: scale(1.1); box-shadow: 0 0 50px #fff; }
+            100% { background: var(--rose); transform: scale(1); }
+        }
+        @keyframes pulseSoft {
+            50% { opacity: 0.3; transform: scale(0.95); }
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes popIn { from { scale: 0; opacity: 0; } to { scale: 1; opacity: 1; } }
+        @keyframes heartbeat { to { transform: scale(1.15); } }
+        @keyframes crackSlow { 0% { opacity: 0; scale: 0.5; } 100% { opacity: 0.8; scale: 1.3; } }
+        @keyframes pulseHint { 50% { opacity: 0.3; } }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <div id="intro-page">
+        <div class="valentine-header">Happy Valentine's Day, Swara 💗🥹</div>
+        <div id="bouquet-hint">A gift for you...</div>
+        <div class="bouquet" onclick="enterLetter()">💐</div>
+        <div class="waiting-msg">i will always love you swara and wait for you 😭🤍</div>
+    </div>
+
+    <div id="message-page">
+        <div class="glass-card">
+            <div class="swara-name">Swara 🥀</div>
+            <div class="emotional-para">
+                I saw you unfollow me, and it felt like losing you all over again. I won’t beg you to stay, because love isn’t about forcing someone. But I just want you to know… you were my favorite person, and a part of me will always miss you. 😭😭
+            </div>
+
+            <div class="heart-system">
+                <div id="the-heart" onclick="finalReveal()">💗</div>
+                <div id="crack-overlay">/</div>
+            </div>
+
+            <div id="btn-hint">Tap here...</div>
+            <button id="love-btn" class="btn-luxe" onclick="breakHeart()">I LOVE YOU</button>
+            
+            <div id="heart-tap-hint">Tap the broken heart...</div>
+
+            <div id="shayari-reveal">
+                Happy Valentine’s Day,<br>
+                You walked away today, but I still believe in us 🌹<br><br>
+                Maybe after boards, when life feels lighter,<br>
+                you’ll come back…<br>
+                and we’ll start again, not as strangers,<br>
+                but as two hearts that never stopped caring 💔✨
+            </div>
+        </div>
+    </div>
+
+    <div id="final-vow-overlay" onclick="this.style.display='none'">
+        <div class="vow-content">
+            I will always love you in every universe 😭🤍
+        </div>
+    </div>
+
+    <script>
+        let isReadyForVow = false;
+
+        function createParticle() {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const icons = ['✨', '🥀', '🤍', '💔'];
+            p.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            p.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 7000);
+        }
+        setInterval(createParticle, 450);
+
+        function enterLetter() {
+            document.getElementById('intro-page').style.display = 'none';
+            const letter = document.getElementById('message-page');
+            const btn = document.getElementById('love-btn');
+            const hint = document.getElementById('btn-hint');
+            letter.style.display = 'block';
+            letter.style.animation = 'fadeInUp 1s ease forwards';
+            
+            setTimeout(() => {
+                btn.classList.add('flash-trigger');
+                hint.style.display = 'block';
+            }, 1000);
+        }
+
+        function breakHeart() {
+            const heart = document.getElementById('the-heart');
+            const crack = document.getElementById('crack-overlay');
+            const btn = document.getElementById('love-btn');
+            const hintText = document.getElementById('btn-hint');
+            const shayari = document.getElementById('shayari-reveal');
+            const heartHint = document.getElementById('heart-tap-hint');
+
+            btn.style.display = 'none';
+            hintText.style.display = 'none';
+            heart.style.animation = 'heartbeat 0.6s infinite alternate';
+
+            setTimeout(() => {
+                crack.style.animation = 'crackSlow 1.5s forwards';
+                setTimeout(() => {
+                    heart.style.animation = 'none';
+                    heart.innerHTML = '💔';
+                    shayari.style.display = 'block';
+                    heartHint.style.display = 'block';
+                    isReadyForVow = true;
+                    document.getElementById('message-page').scrollTo({ top: 300, behavior: 'smooth' });
+                }, 1500);
+            }, 800);
+        }
+
+        function finalReveal() {
+            if(!isReadyForVow) return;
+            const overlay = document.getElementById('final-vow-overlay');
+            overlay.style.display = 'flex';
+            for(let i=0; i<30; i++) {
+                setTimeout(createParticle, i * 40);
+            }
+        }
+    </script>
+</body>
+</html>
+
